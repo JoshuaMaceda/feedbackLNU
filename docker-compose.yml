@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  app:
+    container_name: feedback_app
+    build: .
+    ports:
+      - "8083:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: feedback_db
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: feedback
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql  # This will persist your database data
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: feedback_phpmyadmin
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  mysql_data:  # This defines the named volume for MySQL
