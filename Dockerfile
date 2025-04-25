@@ -2,6 +2,9 @@ FROM php:8.2-apache
 
 RUN docker-php-ext-install pdo pdo_mysql
 
+# para ma wara an error haimo josh an servername shit
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
