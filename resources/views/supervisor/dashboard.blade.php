@@ -11,7 +11,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <img src="{{ asset('images/lnu-logo.png') }}" alt="LNU Logo" class="logo">
-        <h1>LEYTE NORMAL UNIVERSITY PEER FEEDBACK</h1>
+        <h1>LEYTE NORMAL UNIVERSITY UNIT MEMBER FEEDBACK</h1>
         
         <ul>
             <li><a href="#">Home</a></li>
