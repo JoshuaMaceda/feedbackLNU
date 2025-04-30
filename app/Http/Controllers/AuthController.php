@@ -18,24 +18,41 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'username' => ['required'],
+            'password' => ['required']
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard'); // ✅ Redirect properly
+            return $this->redirectBasedOnRole(Auth::user()); // Redirect based on user role
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
+        return back()->withErrors(['username' => 'Invalid credentials.']);
     }
+
+    private function redirectBasedOnRole($user)
+    {
+        switch ($user->role) {
+            case 'student':
+                return redirect()->route('student.dashboard');
+            case 'teacher':
+                return redirect()->route('teacher.dashboard');
+            case 'supervisor':
+                return redirect()->route('supervisor.dashboard');
+            case 'admin':
+                return redirect()->route('admin.redirector');
+            default:
+                return redirect()->route('login'); // Fallback if role isn't recognized
+        }
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->invalidate(); // ✅ Clears session data
-        $request->session()->regenerateToken(); // ✅ Prevents CSRF errors
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect('/'); // ✅ Redirects user to login page
+        return redirect()->route('login'); // Redirect to login page
     }
 
 }

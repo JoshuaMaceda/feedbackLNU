@@ -20,7 +20,7 @@
         <h2>EVALUATION SYSTEM</h2>
         <form action="{{ url('login') }}" method="POST">
             @csrf
-            <input type="text" name="email" placeholder="Email" required>
+            <input type="text" name="username" placeholder="username" required>
             <input type="password" name="password" placeholder="Password" required>
             <div class="checkbox-container">
                 <input type="checkbox" id="remember-me">
