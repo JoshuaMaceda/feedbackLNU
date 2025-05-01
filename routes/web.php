@@ -23,3 +23,26 @@ Route::middleware(['auth'])->group(function () {
 
 //para admin
 Route::post('/admin/redirector', [AdminDashboardController::class, 'redirect'])->name('admin.redirector');
+
+// Student Feedback Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/feedback', [StudentFeedbackController::class, 'index'])->name('feedback.index');
+    Route::post('/feedback', [StudentFeedbackController::class, 'store'])->name('feedback.store');
+    
+    // Profile and notification routes
+    Route::get('/profile/edit', function() {
+        // Your profile edit logic
+    })->name('profile.edit');
+    
+    Route::get('/settings', function() {
+        // Your settings logic
+    })->name('settings');
+    
+    Route::get('/notifications', function() {
+        // Your notifications index logic
+    })->name('notifications.index');
+    
+    Route::get('/notifications/{notification}', function() {
+        // Your notification show logic
+    })->name('notifications.show');
+});

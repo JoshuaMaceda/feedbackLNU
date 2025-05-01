@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id(); // report_id
-            $table->string('teacher_id');
+            $table->bigInteger('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers')->onDelete('cascade');
             
             $table->foreignId('evaluation_period')->nullable()->constrained('evaluations')->onDelete('set null');
