@@ -15,7 +15,7 @@ class StudentDashboardController extends Controller
         $student = Auth::user();
 
         // Get instructors for subjects the student is enrolled in
-        $teachers = Teacher::whereHas('courses', function ($query) use ($student) {
+        /*$teachers = Teacher::whereHas('courses', function ($query) use ($student) {
             $query->whereHas('enrollments', function ($q) use ($student) {
                 $q->where('student_id', $student->id);
             });
@@ -33,14 +33,14 @@ class StudentDashboardController extends Controller
         $notifications = $student->notifications()
             ->orderBy('created_at', 'desc')
             ->take(5)
-            ->get();
+            ->get();*/
 
         // Return the view with all required data
-        return view('student.dashboard', compact(
+        return view('student.dashboard', /*compact(
             'instructors',
             'completedCount',
             'unreadNotificationsCount',
-            'notifications'
-        ));
+            'notifications'*/
+        );
     }
 }

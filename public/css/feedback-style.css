@@ -1,0 +1,174 @@
+:root {
+    --primary-blue: #0066cc;
+    --primary-dark-blue: #004d99;
+    --secondary-teal: #23a5ba;
+    --light-gray: #f5f5f5;
+    --text-dark: #333;
+    --white: #fff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+}
+
+.header {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo-section img {
+    height: 24px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.sidenav {
+    background-color: var(--white);
+    width: 150px;
+    height: calc(100vh - 56px);
+    position: fixed;
+    left: 0;
+    top: 56px;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+.sidenav-header {
+    padding: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.nav-pills .nav-link {
+    color: var(--text-dark);
+    border-radius: 0;
+    padding: 10px 15px;
+    width: 100%;
+}
+
+.content-container {
+    margin-left: 150px;
+    padding: 20px;
+    display: flex;
+}
+
+.instructors-content {
+    width: 350px;
+    border-right: 1px solid #eee;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.instructor-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.instructor-item:hover {
+    background-color: #f0f7ff;
+}
+
+.instructor-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.instructor-info {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Avatar background colors */
+.bg-j { background-color: #4285F4; }
+.bg-m { background-color: #EA4335; }
+.bg-r { background-color: #FBBC05; }
+.bg-s { background-color: #34A853; }
+
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.instructor-detail-container {
+    flex: 1;
+}
+
+.welcome-card {
+    background-color: var(--secondary-teal);
+    color: var(--white);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stats-card {
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 20px;
+    flex: 1;
+    margin-right: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.stats-card:last-child {
+    margin-right: 0;
+}
+
+.stats-card h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin: 10px 0;
+}
+
+.instruction-text {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    color: #666;
+}

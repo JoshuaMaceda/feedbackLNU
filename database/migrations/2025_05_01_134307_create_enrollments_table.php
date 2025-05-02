@@ -12,7 +12,10 @@ class CreateEnrollmentsTable extends Migration
             $table->id();
             $table->bigInteger('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers')->onDelete('cascade');
-            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');         
+            $table->bigInteger('student_id');
+            $table->foreign('student_id')->references('student_id')->on('students')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade'); 
+                    
             $table->timestamps();
         });
     }

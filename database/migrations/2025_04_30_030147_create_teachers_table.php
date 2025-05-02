@@ -12,14 +12,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
-            $table->bigInteger('teacher_id')->primary()->unsigned; 
+            $table->bigInteger('teacher_id')->primary()->unsigned(); 
             $table->foreignId('user_id')->constrained('users')->unique()->onDelete('cascade');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('first_name');
-            $table->json('teacher_load');
             $table->string('department');
-
+            
             $table->timestamps();
         });
     }
