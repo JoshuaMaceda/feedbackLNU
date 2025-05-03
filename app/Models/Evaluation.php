@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Evaluation extends Model
 {
-    protected $fillable = [
-        'teacher_id','evaluator_id','source_type','scores','comments'
-    ];
-    protected $casts = ['scores'=>'array'];
+    use HasFactory;
+
+    protected $fillable = ['evaluator_id', 'teacher_id', 'score', 'comments', 'semester', 'school_year'];
+
+    public function evaluator()
+    {
+        return $this->belongsTo(User::class, 'evaluator_id');
+    }
 
     public function teacher()
     {
-        return $this->belongsTo(User::class,'teacher_id');
-    }
-    public function evaluator()
-    {
-        return $this->belongsTo(User::class,'evaluator_id');
+        return $this->belongsTo(Teacher::class);
     }
 }

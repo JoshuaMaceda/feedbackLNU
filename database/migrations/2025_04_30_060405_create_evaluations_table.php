@@ -10,15 +10,14 @@ return new class extends Migration {
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id(); // evaluation_id
-            $table->string('teacher_id');
+            $table->bigInteger('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers')->onDelete('cascade');
             
             $table->foreignId('score_id')->nullable()->constrained('scores')->onDelete('set null');
             $table->foreignId('evaluator_id')->nullable()->constrained('users')->onDelete('cascade');
 
-            $table->enum('source_type', ['student', 'peer', 'supervisor', 'self']);
+            $table->enum('evaluation_type', ['student', 'peer', 'supervisor', 'self']);
             $table->string('course_id');
-            $table->string('semester');
             $table->string('school_year');
 
             $table->timestamps();

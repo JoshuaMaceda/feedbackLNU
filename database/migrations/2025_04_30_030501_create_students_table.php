@@ -9,7 +9,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->string('student_id')->primary();//string la diman gagamiton for calculation hhhh
+            $table->bigInteger('student_id')->primary();
             $table->foreignId('user_id')->constrained('users')->unique()->onDelete('cascade');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
