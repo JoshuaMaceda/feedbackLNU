@@ -9,14 +9,13 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->bigInteger('student_id')->primary();
+            $table->bigInteger('student_id')->primary()->unsigned();
             $table->foreignId('user_id')->constrained('users')->unique()->onDelete('cascade');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('first_name');
-            $table->json('subjects_taken');
             $table->string('section');
-            $table->string('school year');
+            $table->string('school_year');
             $table->timestamps();
         });
     }

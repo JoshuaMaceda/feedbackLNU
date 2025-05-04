@@ -4,43 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Teacher;
-use App\Models\Evaluation; // Replaced Feedback with Evaluation
+use App\Models\Course;
+use App\Models\Evaluation; // Ensuring the correct model is referenced
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
 class StudentDashboardController extends Controller
 {
+    /**
+     * Show the student dashboard.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
-        // Get the current authenticated student
-        $student = Auth::user();
-
-        // Get instructors for subjects the student is enrolled in
-        /*$teachers = Teacher::whereHas('courses', function ($query) use ($student) {
-            $query->whereHas('enrollments', function ($q) use ($student) {
-                $q->where('student_id', $student->id);
-            });
-        })->get();
+        // Get authenticated student
+        $student = Student::where('user_id', Auth::id())->first();
+        $enrollments = $student->enrollments()->with('course.teacher')->get(); // Fetch enrollments with course & teacher
         
-        // Count completed evaluations by the student
-        $completedCount = Evaluation::where('evaluator_id', $student->id)
-            ->whereIn('teacher_id', $instructors->pluck('id')) // Ensure evaluation is linked to instructor
-            ->count();
+        $instructors = [];
+        $completedEvaluations = 0;
+        
+        foreach ($enrollments as $enrollment) {
+            $course = $enrollment->course;
+            $teacher = $course->teacher;
+            
+            $instructors[$teacher->teacher_id] = [
+                'id' => $teacher->teacher_id,
+                'title' => $teacher->title,
+                'name' => "{$teacher->first_name} {$teacher->last_name}",
+                'subject' => $course->course_name,
+                'course_code' => $course->course_code,
+                'semester' => $course->semester,
+                'year' => $course->year,
+                'completed' => $enrollment->hasEvaluation(),
+            ];
+            
+            if ($enrollment->hasEvaluation()) {
+                $completedEvaluations++;
+            }
+        }
 
-        // Get unread notifications count for the navbar
-        $unreadNotificationsCount = $student->unreadNotifications->count();
+        // Dynamic Stats
+        $totalInstructors = count($instructors);
+        $pendingEvaluations = $totalInstructors - $completedEvaluations;
 
-        // Get recent notifications for the navbar dropdown
-        $notifications = $student->notifications()
-            ->orderBy('created_at', 'desc')
-            ->take(5)
-            ->get();*/
+        // Random color selection for avatars
+        $colors = ['red', 'blue', 'green', 'orange', 'purple', 'yellow'];
 
-        // Return the view with all required data
-        return view('student.dashboard', /*compact(
-            'instructors',
-            'completedCount',
-            'unreadNotificationsCount',
-            'notifications'*/
-        );
+        return view('student.dashboard', compact('instructors', 'totalInstructors', 'completedEvaluations', 'pendingEvaluations', 'colors'));
     }
 }
