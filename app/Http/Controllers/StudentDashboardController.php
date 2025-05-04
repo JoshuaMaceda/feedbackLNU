@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Course;
-use App\Models\Evaluate; 
+use App\Models\Evaluation; // Ensuring the correct model is referenced
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,17 +37,21 @@ class StudentDashboardController extends Controller
                 'course_code' => $course->course_code,
                 'semester' => $course->semester,
                 'year' => $course->year,
-                'completed' => $enrollment->hasEvaluation(), // Updated method
+                'completed' => $enrollment->hasEvaluation(),
             ];
             
-            if ($enrollment->hasEvaluation()) { // Updated method
+            if ($enrollment->hasEvaluation()) {
                 $completedEvaluations++;
             }
         }
-        
+
+        // Dynamic Stats
         $totalInstructors = count($instructors);
         $pendingEvaluations = $totalInstructors - $completedEvaluations;
-        
-        return view('student.dashboard', compact('instructors', 'totalInstructors', 'completedEvaluations', 'pendingEvaluations'));
+
+        // Random color selection for avatars
+        $colors = ['red', 'blue', 'green', 'orange', 'purple', 'yellow'];
+
+        return view('student.dashboard', compact('instructors', 'totalInstructors', 'completedEvaluations', 'pendingEvaluations', 'colors'));
     }
 }

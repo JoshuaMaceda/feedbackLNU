@@ -18,20 +18,21 @@
     <div class="tab-content">
         <div class="tab-pane fade show active" id="all" role="tabpanel">
             <!-- When you implement dynamic data, use this loop: -->
-            @foreach($instructors as $instructor)
+            @foreach ($instructors as $instructor)
                 <div class="instructor-item d-flex align-items-center">
                     <div class="instructor-avatar bg-{{ $colors[array_rand($colors)] }}">
-                        {{ substr($instructor->name, 0, 1) }}
+                        {{ substr($instructor['name'], 0, 1) }}
                     </div>
                     <div class="instructor-info">
-                        <div class="instructor-name">{{ $instructor->title }} {{ $instructor->name }}</div>
-                        <div>Subject: {{ $instructor->subject }}</div>
-                        <div>Course: {{ $instructor->course_code }}</div>
-                        <div>Semester: {{ $instructor->semester }}</div>
-                        <div>Year: {{ $instructor->year }}</div>
+                        <div class="instructor-name">{{ $instructor['title'] }} {{ $instructor['name'] }}</div>
+                        <div>Subject: {{ $instructor['subject'] }}</div>
+                        <div>Course: {{ $instructor['course_code'] }}</div>
+                        <div>Semester: {{ $instructor['semester'] }}</div>
+                        <div>Year: {{ $instructor['year'] }}</div>
                     </div>
                 </div>
             @endforeach
+
         </div>
         
         <div class="tab-pane fade" id="completed" role="tabpanel">
@@ -55,23 +56,24 @@
     <div class="row">
         <div class="col-md-4">
             <div class="stats-card">
-                <div class="stats-number">6</div>
+                <div class="stats-number">{{ $totalInstructors }}</div>
                 <div>Total Instructors</div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="stats-card">
-                <div class="stats-number">0</div>
+                <div class="stats-number">{{ $completedEvaluations }}</div>
                 <div>Completed</div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="stats-card">
-                <div class="stats-number">6</div>
+                <div class="stats-number">{{ $pendingEvaluations }}</div>
                 <div>Pending</div>
             </div>
         </div>
     </div>
+
     
     <div class="mt-4">
         <p>Select an instructor from the sidebar to begin providing feedback.</p>

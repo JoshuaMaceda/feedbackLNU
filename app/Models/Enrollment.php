@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Evaluation; // Ensure correct model reference
+use App\Models\Evaluation;
 
 class Enrollment extends Model
 {
@@ -20,7 +20,7 @@ class Enrollment extends Model
      */
     public function student()
     {
-        return $this->belongsTo(Student::class, 'student_id', 'student_id');
+        return $this->belongsTo(Student::class, 'evaluator_id', 'id'); // Changed from student_id to evaluator_id
     }
 
     /**
@@ -46,8 +46,8 @@ class Enrollment extends Model
      */
     public function hasEvaluation()
     {
-        return Evaluation::where('student_id', $this->student_id)
-            ->where('course_id', $this->course_id)
-            ->exists();
+        return Evaluation::where('evaluator_id', $this->evaluator_id) // Changed from student_id to evaluator_id
+                         ->where('course_id', $this->course_id)
+                         ->exists();
     }
 }
