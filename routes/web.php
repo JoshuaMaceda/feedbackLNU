@@ -42,4 +42,6 @@ Route::get('/to-evaluate', fn() => view('to-evaluate'))->name('to-evaluate');
 // Instructor & Feedback Routes
 Route::get('/instructor/{id}', fn($id) => view('student.instructor-detail', ['id' => $id]))->name('instructor.show');
 Route::get('/feedback/create/{instructor}', fn($instructor) => view('student.feedback-form', ['instructor' => $instructor]))->name('feedback.create');
-Route::post('/feedback/store', fn() => redirect()->route('dashboard')->with('success', 'Feedback submitted successfully!'))->name('feedback.store');
+Route::post('/feedback/store', fn() => redirect()->route('student.dashboard')->with('success', 'Feedback submitted successfully!'))->name('feedback.store');
+
+
