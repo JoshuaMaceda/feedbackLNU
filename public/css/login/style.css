@@ -171,3 +171,21 @@ button[type="submit"]:hover,
     text-decoration: underline;
 }
 
+.alert {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+}
+
