@@ -27,7 +27,7 @@
     <div class="login-box">
         <div class="logo-container">
             <div class="logo">
-                <img src="{{ asset('images/lnu_logo.jfif') }}" alt="Evaluation System Logo">
+                <img src="{{ asset('images/lnu_logo.png') }}" alt="Evaluation System Logo">
             </div>
             <h1>EVALUATION SYSTEM</h1>
             <p class="subtitle">Log in to access your account</p>

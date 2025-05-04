@@ -14,8 +14,8 @@
     <!-- Header -->
     <header class="header">
         <div class="logo-text">
-            <img src="{{ asset('images/lnu-logo.png') }}" alt="LNU Logo" class="logo-img">
-            LNU Feedback
+            <img src="{{ asset('images/lnu_logo.png') }}" alt="LNU Logo" class="logo-img">
+            QualiTeach
         </div>
         <div class="user-info position-absolute end-0 d-flex align-items-center gap-5">
             <a href="{{ route('student.dashboard') }}" class="text-white text-decoration-none">Dashboard</a>

@@ -87,8 +87,8 @@
 
 @section('content')
     <div class="welcome-card">
-        <h2>Welcome to Course Feedback</h2>
-        <p>Your voice matters! Help us improve teaching and learning by providing your valuable feedback on your instructors and courses.</p>
+        <h2>Welcome to QualiTeach: an LLM - Powered Teacher Evaluation Platform</h2>
+        <p>Your voice matters! Help us improve teaching and learning by providing your valuable feedback on your instructors.</p>
     </div>
     
     <div class="row">
