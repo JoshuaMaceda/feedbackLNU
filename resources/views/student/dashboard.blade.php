@@ -36,13 +36,45 @@
         </div>
         
         <div class="tab-pane fade" id="completed" role="tabpanel">
-            <!-- Completed evaluations will go here -->
-            <p class="text-muted p-3">No completed evaluations yet.</p>
+            @if(count($completedInstructors) > 0)
+                @foreach ($completedInstructors as $instructor)
+                    <div class="instructor-item d-flex align-items-center">
+                        <div class="instructor-avatar bg-{{ $colors[array_rand($colors)] }}">
+                            {{ substr($instructor['name'], 0, 1) }}
+                        </div>
+                        <div class="instructor-info">
+                            <div class="instructor-name">{{ $instructor['title'] }} {{ $instructor['name'] }}</div>
+                            <div>Subject: {{ $instructor['subject'] }}</div>
+                            <div>Course: {{ $instructor['course_code'] }}</div>
+                            <div>Semester: {{ $instructor['semester'] }}</div>
+                            <div>Year: {{ $instructor['year'] }}</div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <p class="text-muted p-3">No completed evaluations yet.</p>
+            @endif
         </div>
         
         <div class="tab-pane fade" id="evaluate" role="tabpanel">
-            <!-- To evaluate instructors will go here -->
-            <!-- This would be the same structure as above but filtered -->
+            @if(count($instructorsToEvaluate) > 0)
+                @foreach ($instructorsToEvaluate as $instructor)
+                    <div class="instructor-item d-flex align-items-center">
+                        <div class="instructor-avatar bg-{{ $colors[array_rand($colors)] }}">
+                            {{ substr($instructor['name'], 0, 1) }}
+                        </div>
+                        <div class="instructor-info">
+                            <div class="instructor-name">{{ $instructor['title'] }} {{ $instructor['name'] }}</div>
+                            <div>Subject: {{ $instructor['subject'] }}</div>
+                            <div>Course: {{ $instructor['course_code'] }}</div>
+                            <div>Semester: {{ $instructor['semester'] }}</div>
+                            <div>Year: {{ $instructor['year'] }}</div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <p class="text-muted p-3">No pending evaluations left!</p>
+            @endif
         </div>
     </div>
 @endsection

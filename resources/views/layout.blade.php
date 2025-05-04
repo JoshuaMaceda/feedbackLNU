@@ -123,10 +123,26 @@
             <img src="{{ asset('images/lnu-logo.png') }}" alt="LNU Logo" class="logo-img">
             LNU Feedback
         </div>
-        <div>
-            <button class="btn btn-logout">Logout</button>
+        <div class="user-info position-absolute end-0 d-flex align-items-center gap-5">
+            <a href="{{ route('student.dashboard') }}" class="text-white text-decoration-none">Dashboard</a>
+
+            <!-- Dropdown for User Info -->
+            <div class="dropdown">
+                <span class="dropdown-toggle text-white me-5" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ $userName }}
+                </span>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
+
 
     <div class="container-fluid">
         <div class="row">
@@ -144,7 +160,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
     <script>
         // Any custom JavaScript can go here
     </script>

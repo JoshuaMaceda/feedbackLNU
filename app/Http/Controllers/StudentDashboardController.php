@@ -46,12 +46,22 @@ class StudentDashboardController extends Controller
         }
 
         // Dynamic Stats
+        $instructorsToEvaluate = array_filter($instructors, function ($instructor) {
+            return !$instructor['completed']; // Show only instructors who haven't been evaluated
+        });        
         $totalInstructors = count($instructors);
         $pendingEvaluations = $totalInstructors - $completedEvaluations;
-
         // Random color selection for avatars
         $colors = ['red', 'blue', 'green', 'orange', 'purple', 'yellow'];
 
-        return view('student.dashboard', compact('instructors', 'totalInstructors', 'completedEvaluations', 'pendingEvaluations', 'colors'));
-    }
+        $student = Student::where('user_id', Auth::id())->first(); 
+
+        $userName = $student ? "{$student->first_name} {$student->last_name}" : 'Guest';
+        
+        $completedInstructors = array_filter($instructors, function ($instructor) {
+            return $instructor['completed']; // Show only instructors who HAVE been evaluated
+        });
+        
+        return view('student.dashboard', compact('userName','instructors', 'totalInstructors', 'completedEvaluations', 'pendingEvaluations', 'colors', 'instructorsToEvaluate', 'completedInstructors'));
+            }
 }
