@@ -23,4 +23,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Evaluation::class, 'teacher_id');
     }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'user_id', 'id');
+    }
 }

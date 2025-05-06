@@ -9,9 +9,7 @@ class Evaluation extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'feedback_id'; // Explicitly setting primary key
-    public $incrementing = false; // If IDs are manually assigned and not auto-incrementing
-    protected $keyType = 'bigint'; // Match database structure
+    protected $primaryKey = 'id'; // Changed to match the migration
     protected $guarded = []; // Allows all fields for admin-driven creation
 
     /**
@@ -19,7 +17,7 @@ class Evaluation extends Model
      */
     public function student()
     {
-        return $this->belongsTo(Student::class, 'student_id', 'student_id');
+        return $this->belongsTo(Student::class, 'evaluator_id', 'user_id');
     }
 
     /**
@@ -35,19 +33,14 @@ class Evaluation extends Model
      */
     public function course()
     {
-        return $this->belongsTo(Course::class, 'course_id', 'course_id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
     /**
-     * Calculate the average rating across all questions.
-     * 
-     * @return float
+     * Get the score related to this evaluation
      */
-    public function getAverageRatingAttribute()
+    public function score()
     {
-        $ratings = [$this->professionalism, $this->commitment, $this->knowledge, 
-                    $this->independent_learning, $this->management, $this->critical_factors];
-
-        return round(array_sum($ratings) / count($ratings), 1);
+        return $this->belongsTo(Score::class);
     }
 }

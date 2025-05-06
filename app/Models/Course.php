@@ -9,9 +9,9 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'course_id'; // Explicitly setting the primary key
-    public $incrementing = false; // If IDs are manually assigned and not auto-incrementing
-    protected $keyType = 'bigint'; // Match database structure
+    protected $primaryKey = 'id'; // Match the table's primary key
+    public $incrementing = true; // Auto-incrementing ID
+    protected $keyType = 'int';
     protected $guarded = []; // Allows all fields for admin-driven creation
 
     /**
@@ -27,7 +27,7 @@ class Course extends Model
      */
     public function enrollments()
     {
-        return $this->hasMany(Enrollment::class, 'course_id', 'course_id');
+        return $this->hasMany(Enrollment::class, 'course_id', 'id');
     }
 
     /**
@@ -43,6 +43,6 @@ class Course extends Model
      */
     public function feedback()
     {
-        return $this->hasMany(Feedback::class, 'course_id', 'course_id');
+        return $this->hasMany(Feedback::class, 'course_id', 'id');
     }
 }

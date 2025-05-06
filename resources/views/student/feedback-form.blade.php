@@ -1,25 +1,29 @@
-@extends('layout', ['userName' => $userName])
-
-@section('sidebar')
-    @include('student.dashboard') <!-- This keeps the sidebar content intact -->
-@endsection
+@extends('student.layout')
 
 @section('content')
 <div class="container mt-4">
-    <h2>Student's Evaluation of Faculty</h2>
+    <div class="mb-4">
+        <h2 class="qualiteach-title">Currently Evaluating:</h2>
+        <div class="instructor-info-card">
+            <h3 class="mb-2">{{ $instructorData['title'] ?? '' }} {{ $instructorData['name'] ?? '' }}</h3>
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-book me-2"></i> <strong>Subject:</strong> {{ $instructorData['subject'] ?? '' }}</p>
+                    <p class="mb-1"><i class="fas fa-id-card me-2"></i> <strong>Course:</strong> {{ $instructorData['course_code'] ?? '' }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><i class="fas fa-calendar me-2"></i> <strong>Semester:</strong> {{ $instructorData['semester'] ?? '' }}</p>
+                    <p class="mb-1"><i class="fas fa-calendar-alt me-2"></i> <strong>Year:</strong> {{ $instructorData['year'] ?? '' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <form action="{{ route('feedback.store') }}" method="POST">
         @csrf
 
-        <div class="mb-3">
-            <label for="teacher_id" class="form-label">Teacher ID</label>
-            <input type="number" name="teacher_id" id="teacher_id" class="form-control" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="course_id" class="form-label">Course ID</label>
-            <input type="text" name="course_id" id="course_id" class="form-control" required>
-        </div>
+        <input type="hidden" name="teacher_id" value="{{ $instructorData['id'] ?? '' }}">
+        <input type="hidden" name="course_id" value="{{ $instructorData['course_code'] ?? '' }}">
 
         @php
         $categories = [
@@ -66,30 +70,76 @@
                 'Creates a supportive classroom environment'
             ]
         ];
+
+        // Define rating labels in the order they should display (Poor to Outstanding)
+        $rating_labels = [
+            1 => 'Poor',
+            2 => 'Fair',
+            3 => 'Satisfactory',
+            4 => 'Very Satisfactory',
+            5 => 'Outstanding'
+        ];
         @endphp
 
         @foreach ($categories as $category => $questions)
-            <h4 class="mt-4">{{ ucfirst(str_replace('_', ' ', $category)) }}</h4>
-            @foreach ($questions as $index => $question)
-                <div class="mb-3">
-                    <label class="form-label">{{ $question }}</label>
-                    <select name="{{ $category }}[]" class="form-select" required>
-                        <option value="q{{ $index + 1 }}">Outstanding</option>
-                        <option value="q{{ $index + 1 }}">Very Satisfactory</option>
-                        <option value="q{{ $index + 1 }}">Satisfactory</option>
-                        <option value="q{{ $index + 1 }}">Fair</option>
-                        <option value="q{{ $index + 1 }}">Poor</option>
-                    </select>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">{{ ucfirst(str_replace('_', ' ', $category)) }}</h4>
                 </div>
-            @endforeach
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="evaluation-table table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="width:40%;">Performance Factor</th>
+                                    @foreach($rating_labels as $value => $label)
+                                        <th class="text-center">{{ $label }}</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($questions as $index => $question)
+                                    <tr>
+                                        <td class="align-middle">{{ $question }}</td>
+                                        @foreach($rating_labels as $value => $label)
+                                            <td class="text-center align-middle">
+                                                <input 
+                                                    type="radio" 
+                                                    name="{{ $category }}[{{ $index }}]" 
+                                                    id="{{ $category }}_{{ $index }}_{{ $value }}" 
+                                                    value="{{ $value }}" 
+                                                    required
+                                                >
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         @endforeach
 
-        <div class="mb-3">
-            <label for="comments" class="form-label">Additional Comments</label>
-            <textarea name="comments" id="comments" rows="3" class="form-control"></textarea>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="mb-0">Comments</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <textarea name="comments" id="comments" rows="5" class="form-control" placeholder="Please provide any additional feedback or comments about the instructor..."></textarea>
+                </div>
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit Evaluation</button>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+            <a href="{{ route('student.dashboard') }}" class="btn btn-secondary me-md-2">
+                <i class="fas fa-arrow-left me-1"></i> Return to Dashboard
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane me-1"></i> Submit Evaluation
+            </button>
+        </div>
     </form>
 </div>
 @endsection

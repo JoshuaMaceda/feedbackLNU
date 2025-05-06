@@ -1,114 +1,380 @@
-/* General Styles */
-:root {
-    --primary-color: #24335a;
-    --secondary-color: #f7a11c;
-    --light-blue: #3a5896;
-    --bg-light: #e9f0f9;
-    --text-dark: #333;
-    --text-light: #6c757d;
-    --white: #fff;
-    --border-color: #dee2e6;
-}
-
+/* Main Layout Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-light);
-    margin: 0;
-    padding: 0;
-    background-image: url('../images/university-bg.jpg');
+    padding-top: 70px; /* Height of header */
+    background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('../images/campus-bg.jpg');
     background-size: cover;
-    background-position: center;
     background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Header Styles */
+/* ===================== HEADER STYLES ===================== */
 .header {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #232d4b;
+    border-bottom: 4px solid #ffa000;
+    color: white;
+    padding: 0.5rem 2rem 0.5rem 1.5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-bottom: 4px solid var(--secondary-color);
+    justify-content: space-between;
+    height: 70px;
+    z-index: 1000;
 }
 
 .logo-text {
     display: flex;
     align-items: center;
+    font-size: 1.25rem; /* Slightly smaller */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Add spacing for clarity */
+    color: white; /* Ensure text is white */
 }
 
 .logo-img {
-    height: 50px;
-    margin-right: 15px;
-}
-
-.university-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.system-name {
-    font-size: 0.9rem;
-    text-transform: uppercase;
+    height: 52px; /* Slightly taller for better alignment */
+    margin-right: 14px;
 }
 
 .user-info {
     display: flex;
     align-items: center;
+    gap: 1rem;
+    z-index:1010;
+    position: static; /* Remove absolute, let flexbox handle alignment */
 }
 
-.user-info img {
+.btn.btn-link.text-white {
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.4rem 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn.btn-link.text-white:hover,
+.btn.btn-link.text-white:focus {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffa000 !important;
+    text-decoration: none;
+}
+
+.btn-evaluate {
+    background-color: #ffa000;
+    border-color: #ffa000;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.45rem 1.2rem;
+    margin-left: 0.5rem;
+    transition: background 0.2s, border 0.2s;
+}
+
+.btn-evaluate:hover,
+.btn-evaluate:focus {
+    background-color: #ff8f00;
+    border-color: #ff8f00;
+    color: white;
+}
+
+.user-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-left: 10px;
+    background-color: #eee;
+    color: #232d4b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
 }
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    min-width: 180px;
+}
+/* ===================== END HEADER STYLES ===================== */
+
+/* ===================== FEEDBACK FORM STYLES ===================== */
+
+/* Main Container */
+.container {
+    max-width: 950px;
+    margin: 0 auto;
+    background: transparent;
+}
+
+/* Section Title */
+.qualiteach-title {
+    color: #232d4b;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Instructor Info Card */
+.instructor-info-card {
+    position: sticky;
+    top: 80px; /* Just below the header with a small gap */
+    background: #e8f0fe;
+    border-left: 5px solid #232d4b;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+    z-index: 90;}
+
+.instructor-info-card h3 {
+    color: #232d4b;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Card Section for Each Category */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(44, 62, 80, 0.09);
+    margin-bottom: 2rem;
+    background: #fff;
+}
+
+.card-header {
+    background: #232d4b !important;
+    color: #fff !important;
+    border-radius: 15px 15px 0 0;
+    padding: 0.7rem 1.5rem;
+    border-bottom: none;
+}
+
+.card-header h4 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Card Body */
+.card-body {
+    padding: 1.2rem 1.5rem;
+}
+
+/* Question Label */
+.form-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #232d4b;
+    margin-bottom: 0.3rem;
+}
+
+/* Rating Container */
+.rating-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.2rem;
+    align-items: center;
+}
+
+.rating-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.92rem;
+    color: #232d4b;
+}
+
+.rating-option input[type="radio"] {
+    accent-color: #232d4b;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 0.15rem;
+    cursor: pointer;
+}
+
+.rating-option label {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: #232d4b;
+}
+
+/* Comments Section */
+textarea.form-control {
+    border-radius: 8px;
+    border: 1px solid #cfd8dc;
+    font-size: 1rem;
+    padding: 1rem;
+    min-height: 120px;
+    resize: vertical;
+    background: #f9fafb;
+    color: #232d4b;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #232d4b;
+    border-color: #232d4b;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.55rem 1.4rem;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #1a1f36;
+    border-color: #1a1f36;
+}
+
+.btn-secondary {
+    background-color: #e0e4ed;
+    border-color: #e0e4ed;
+    color: #232d4b;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.55rem 1.4rem;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+    background-color: #cfd8dc;
+    border-color: #cfd8dc;
+    color: #232d4b;
+}
+
+/* ===================== END FEEDBACK FORM STYLES ===================== */
 
 /* Sidebar Styles */
 .sidebar {
-    background-color: var(--bg-light);
+    position: fixed;
+    top: 70px; /* Height of header */
+    left: 0;
+    width: 16.67%; /* Matches col-lg-2 width */
+    height: calc(100vh - 70px);
+    background-color: #edf2f9;
+    padding: 1.5rem 0.5rem;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+/* Make sure sidebar takes proper height */
+.sidebar-container {
+    padding-bottom: 2rem;
+    min-height: 100%;
+}
+
+.content-area {
+    margin-left: 16.67%; /* Match sidebar width */
+    padding: 2rem;
     min-height: calc(100vh - 70px);
-    padding: 20px 0;
-    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
 }
 
-.sidebar-heading {
-    color: var(--text-dark);
-    padding: 0 15px 10px;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 15px;
+/* Dashboard Specific Styles */
+.welcome-card {
+    background-color: #ffffff; /* white background */
+    background: none;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    color: #323232; /* dark text */
 }
 
-.nav-tabs {
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 15px;
+.welcome-card h2 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #1a237e; /* navy heading */
 }
 
-.nav-tabs .nav-link {
-    color: var(--text-dark);
-    border: none;
-    padding: 8px 9px;
-    font-size: 0.9rem;
+.stats-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.nav-tabs .nav-link.active {
-    color: var(--primary-color);
+.stats-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    height: 100%;
+    margin-bottom: 1rem;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+}
+
+.stats-number {
+    font-size: 3rem;
     font-weight: bold;
-    background-color: transparent;
-    border-bottom: 2px solid var(--primary-color);
+    color: #323232; /* dark number */
+    margin-bottom: 0.5rem;
+}
+
+/* Sidebar Styles */
+.sidebar-heading {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: #1a237e;
 }
 
 .instructor-item {
-    padding: 12px 15px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.instructor-item:hover, .instructor-item.active {
-    background-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.instructor-item:hover {
+    background-color: #f5f9ff;
+    transform: translateX(5px);
 }
+
+/* Enhanced active state for sidebar instructor item */
+.instructor-item.active {
+    background-color: #e8f0fe; /* Match instructor-info-card background */
+    border-left: 4px solid #232d4b; /* Match instructor-info-card border */
+    transform: translateX(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.instructor-item.active .instructor-name {
+    font-weight: bold;
+    color: #232d4b; /* Match primary theme color */
+}
+
+.instructor-item.active .instructor-info .small-text {
+    color: #495057; /* Slightly darker for better visibility */
+}
+
+/* Make sure links in active items have proper color */
+.instructor-item.active a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.instructor-item a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 
 .instructor-avatar {
     width: 40px;
@@ -117,155 +383,331 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: white;
     font-weight: bold;
-    margin-right: 12px;
-}
-
-.instructor-info {
-    flex: 1;
+    margin-right: 0.75rem;
+    background-color: #7b1fa2; /* solid accent color */
 }
 
 .instructor-name {
-    font-weight: bold;
-    color: var(--text-dark);
-    margin-bottom: 3px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #1a237e;
 }
 
-.instructor-info div {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    line-height: 1.4;
+.small-text {
+    font-size: 0.75rem;
+    color: #6c757d;
 }
 
-/* Content Area Styles */
-.content-area {
-    padding: 20px;
-}
-
-.welcome-card, .evaluation-header {
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.welcome-card h2, .evaluation-header h2 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-.stats-card {
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.stats-number {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-/* Evaluation Form Styles */
-.evaluation-section {
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.evaluation-section h3 {
-    color: var(--white);
-    background-color: var(--light-blue);
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin: -20px -20px 20px -20px;
-    font-size: 1.2rem;
-}
-
-.rating-item {
-    border-bottom: 1px solid var(--border-color);
-    padding: 15px 0;
-}
-
-.rating-item:last-child {
-    border-bottom: none;
-}
-
-.rating-question {
-    margin-bottom: 10px;
+/* Tab Navigation */
+.nav-tabs .nav-link {
+    color: #495057;
+    border: none;
     font-weight: 500;
+    padding: 0.5rem 0.55rem;
 }
 
-.rating-options {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.nav-tabs .nav-link.active {
+    color: #1a237e;
+    background-color: transparent;
+    border-bottom: 2px solid #1a237e;
 }
 
-.form-check-inline {
-    margin-right: 0;
-    flex: 1;
-    min-width: 100px;
-    text-align: center;
+/* Feedback Form Styles */
+
+/* Add space for the sticky header */
+.card:first-of-type {
+    margin-top: 80px;
 }
 
-/* Button Styles */
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    padding: 8px 20px;
+/* Sticky Evaluatee Header */
+.sticky-evaluatee-header {
+    position: sticky;
+    top: 70px; /* Exactly below the main header */
+    z-index: 99; /* High enough to appear above content but below header */
+    background: white;
+    padding: 15px 15px;
+    margin-bottom: 0; /* Remove bottom margin as we'll use the spacer */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;}
+
+
+/* Enhanced Instructor Info Card */
+.instructor-info-card {
+    background: #e8f0fe;
+    border-left: 5px solid #232d4b;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 0; /* Remove bottom margin since it's in the sticky header */
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
 }
 
-.btn-primary:hover {
-    background-color: #1a2647;
-    border-color: #1a2647;
+
+.card-header {
+    background-color: #1a237e !important;
+    color: white !important;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 992px) {
-    .sidebar {
-        min-height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-    
-    .rating-options {
-        flex-direction: column;
-    }
-    
-    .form-check-inline {
-        margin-bottom: 5px;
-    }
-}
-
-/* Tab Content Styling */
-.tab-content {
-    padding: 15px;
-}
-
-.tab-pane p.text-muted {
-    font-style: italic;
-}
-
-/* Add these to match the screenshots */
-.header .dropdown-toggle {
+.form-select {
     cursor: pointer;
 }
 
-.evaluation-header h5 {
-    color: var(--text-light);
-    margin-bottom: 5px;
+/* Add the evaluation rating styles */
+.rating-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
 }
 
-.evaluation-header p {
-    color: var(--text-light);
+.rating-circle.selected {
+    background-color: #1a237e;
+}
+
+/* Evaluation buttons */
+.btn-primary {
+    background-color: #1a237e;
+    border-color: #1a237e;
+}
+
+.btn-primary:hover {
+    background-color: #0d1657;
+    border-color: #0d1657;
+}
+
+.btn-evaluate {
+    background-color: #ffa000;
+    border-color: #ffa000;
+    color: white;
+}
+
+.btn-evaluate:hover {
+    background-color: #ff8f00;
+    border-color: #ff8f00;
+    color: white;
+}
+
+/* UI enhancements */
+.form-select:focus, .form-control:focus {
+    border-color: #1a237e;
+    box-shadow: 0 0 0 0.25rem rgba(26, 35, 126, 0.25);
+}
+
+/* User Avatar in header */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 80%;
+        z-index: 1000;
+        transition: 0.3s;
+        overflow-y: auto;
+    }
+    
+    .sidebar.show {
+        left: 0;
+    }
+    
+    .content-area {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .rating-container {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+    
+    .rating-option {
+        margin-bottom: 10px;
+    }
+    .container {
+        padding: 0 0.5rem;
+    }
+    .card-header, .card-body {
+        padding: 1rem;
+    }
+    .instructor-info-card {
+        padding: 1rem;
+    }
+}
+
+
+
+
+.evaluation-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.evaluation-table th, .evaluation-table td {
+    border: 1px solid #cfd8dc;
+    padding: 0.6rem 0.5rem;
     font-size: 1rem;
+}
+
+.evaluation-table th {
+    background: #f5f7fa;
+    color: #232d4b;
+    font-weight: 600;
+    text-align: center;
+}
+
+.evaluation-table td {
+    vertical-align: middle;
+}
+
+.evaluation-table input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #232d4b;
+    cursor: pointer;
+}
+
+
+/* Responsive adjustment */
+@media (max-width: 991px) {
+    .sidebar {
+        width: 25%; /* Matches col-md-3 width */
+    }
+    
+    .content-area {
+        margin-left: 25%;
+    }
+}
+
+
+.sticky-spacer {
+    height: 0;
+    margin-bottom: 20px;
+    transition: height 0.2s;
+}
+
+@media (max-width: 768px) {
+    .sticky-spacer {
+        height: 250px !important;
+    }
+
+    .sticky-evaluatee-header {
+        padding: 10px;
+    }
+    
+    .instructor-info-card {
+        padding: 0.8rem 1rem;
+    }
+
+    .evaluation-table th, .evaluation-table td {
+        font-size: 0.92rem;
+        padding: 0.4rem 0.2rem;
+    }
+
+        /* Mobile toggle button for sidebar */
+        #sidebarToggle {
+            display: block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1010;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #232d4b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+}
+
+
+
+
+/*para status indicators*/
+
+/* Enhanced sidebar tab styling */
+.nav-tabs .nav-link {
+    position: relative;
+    font-weight: 500;
+}
+
+/* Badge counter for pending evaluations */
+.nav-tabs .nav-link .badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+    vertical-align: middle;
+}
+
+/* Status badge styling */
+.instructor-info .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Improved instructor item styling */
+.instructor-item {
+    transition: all 0.25s ease;
+    border-left: 3px solid transparent;
+}
+
+.instructor-item:hover {
+    border-left-color: #ffa000;
+}
+
+/* Enhanced pending evaluation styles */
+.instructor-item a:hover .instructor-avatar.bg-warning {
+    box-shadow: 0 0 0 3px rgba(255, 160, 0, 0.3);
+}
+
+/* Enhanced completed evaluation styles */
+.instructor-avatar.bg-success {
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+}
+
+/* Add spacing between instructor name and badge */
+.instructor-info .d-flex {
+    gap: 0.5rem;
+}
+
+/* Make the instructor content take full width */
+.instructor-info {
+    width: calc(100% - 55px);
+}
+
+/* Enhance active state styling */
+.instructor-item.active {
+    background-color: #f0f8ff;
+    border-left: 4px solid #232d4b;
+}
+
+/* Add animation to pending indicators */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.badge.bg-warning {
+    animation: pulse 2s infinite;
+}
+
+/* Counter notification style for evaluate tab */
+#instructorTabs .badge {
+    transition: all 0.3s ease;
 }

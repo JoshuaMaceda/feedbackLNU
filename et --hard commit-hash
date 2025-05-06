@@ -1,0 +1,20 @@
+[33mb073652[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32merror[m[33m, [m[1;31morigin/error[m[33m)[m HEAD@{0}: commit (merge): Merge branch 'error' of https://github.com/JoshuaMaceda/feedbackLNU into error
+[33mf5da429[m HEAD@{1}: checkout: moving from main to error
+[33mec7365b[m[33m ([m[1;32mmain[m[33m)[m HEAD@{2}: commit: made the design almost like the one in figma but questionnaire is non functional
+[33m11bc8c1[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{3}: commit (merge): sidenav tabs functional, dashboard href, dynamic name and logout button added
+[33mc9c6744[m HEAD@{4}: commit: sidenav tabs functional, dashboard href and dynamic name with logout button
+[33mbe97fc7[m HEAD@{5}: pull origin main: Fast-forward
+[33mfdaba64[m HEAD@{6}: checkout: moving from error to main
+[33mf5da429[m HEAD@{7}: checkout: moving from main to error
+[33mfdaba64[m HEAD@{8}: checkout: moving from error to main
+[33mf5da429[m HEAD@{9}: commit: made tab in sidenav working, made the stats dynamic, added dashboard href and logout button similar to the figma.
+[33m08ca878[m HEAD@{10}: commit: dynamic values for teacher showing and stats
+[33mac5569e[m HEAD@{11}: commit: so close yet so far. still not working but close.
+[33m4269b1b[m HEAD@{12}: checkout: moving from error to error
+[33m4269b1b[m HEAD@{13}: commit: fixed the database. developed the ui for student, no functionality yet.
+[33m5343253[m HEAD@{14}: commit: not yet finished, dont pull this.
+[33m2465de7[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{15}: checkout: moving from master to error
+[33m2465de7[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m HEAD@{16}: commit: fixed userbased controllers, changed migration scripts
+[33mfdaba64[m HEAD@{17}: pull origin main: Fast-forward
+[33m763a2a5[m HEAD@{18}: commit: added maraksot everything but the main idea of how it will look like is there
+[33me0c232a[m HEAD@{19}: initial pull

@@ -4,23 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Evaluation;
 
 class Enrollment extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'enrollment_id'; // Explicitly setting primary key
-    public $incrementing = false; // If IDs are manually assigned and not auto-incrementing
-    protected $keyType = 'bigint'; // Match database structure
-    protected $guarded = []; // Allows all fields for admin-driven creation
+    protected $primaryKey = 'id'; // Changed to match standard Laravel convention
+    protected $guarded = [];
 
     /**
      * Get the student associated with this enrollment.
      */
     public function student()
     {
-        return $this->belongsTo(Student::class, 'evaluator_id', 'id'); // Changed from student_id to evaluator_id
+        return $this->belongsTo(Student::class, 'student_id', 'student_id');
     }
 
     /**
@@ -32,22 +29,23 @@ class Enrollment extends Model
     }
 
     /**
-     * Get the teacher of this enrolled course.
-     */
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
-    }
-
-    /**
      * Check if an evaluation has been submitted for this enrollment.
      * 
      * @return bool
      */
     public function hasEvaluation()
     {
-        return Evaluation::where('evaluator_id', $this->evaluator_id) // Changed from student_id to evaluator_id
-                         ->where('course_id', $this->course_id)
+        $student = $this->student;
+        $course = $this->course;
+        
+        if (!$student || !$course) {
+            return false;
+        }
+        
+        // Fixed to match the correct foreign keys and table schema
+        return Evaluation::where('evaluator_id', $student->user_id)
+                         ->where('course_id', $course->id) // Using course id instead of course_id
+                         ->where('teacher_id', $course->teacher_id)
                          ->exists();
     }
 }

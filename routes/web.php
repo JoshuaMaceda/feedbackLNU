@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\SupervisorDashboardController;
 use App\Http\Controllers\TeacherDashboardController;
-use App\Http\Controllers\StudentFeedbackController;
+use App\Http\Controllers\FeedbackController;
 
 // Authentication Routes
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login'); 
@@ -21,9 +21,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/redirector', [AdminDashboardController::class, 'index'])->name('admin.redirector');
     Route::post('/admin/redirector', [AdminDashboardController::class, 'redirect'])->name('admin.redirector');
 
-    // Student Feedback Routes
-    Route::get('/feedback', [StudentFeedbackController::class, 'index'])->name('feedback.index');
-    Route::post('/feedback', [StudentFeedbackController::class, 'store'])->name('feedback.store');
+    // Student Feedback Routes - FIXED TO USE THE ACTUAL CONTROLLER METHODS
+    Route::get('/feedback/create/{instructor}', [FeedbackController::class, 'create'])->name('feedback.create');
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
     // Profile & Settings
     Route::get('/profile/edit', fn() => view('profile-edit'))->name('profile.edit');
@@ -41,7 +41,3 @@ Route::get('/to-evaluate', fn() => view('to-evaluate'))->name('to-evaluate');
 
 // Instructor & Feedback Routes
 Route::get('/instructor/{id}', fn($id) => view('student.instructor-detail', ['id' => $id]))->name('instructor.show');
-Route::get('/feedback/create/{instructor}', fn($instructor) => view('student.feedback-form', ['instructor' => $instructor]))->name('feedback.create');
-Route::post('/feedback/store', fn() => redirect()->route('student.dashboard')->with('success', 'Feedback submitted successfully!'))->name('feedback.store');
-
-
