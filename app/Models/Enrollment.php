@@ -42,10 +42,12 @@ class Enrollment extends Model
             return false;
         }
         
-        // Fixed to match the correct foreign keys and table schema
+        // Fixed query to match how evaluations are stored
+        // Check if the course_id field in evaluations table contains the course code 
+        // (as it seems to be stored that way in the feedback form)
         return Evaluation::where('evaluator_id', $student->user_id)
-                         ->where('course_id', $course->id) // Using course id instead of course_id
-                         ->where('teacher_id', $course->teacher_id)
-                         ->exists();
+                        ->where('course_id', $course->course_code) // Changed from $course->id to $course->course_code
+                        ->where('teacher_id', $course->teacher_id)
+                        ->exists();
     }
 }

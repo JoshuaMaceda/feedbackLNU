@@ -209,10 +209,12 @@ class FeedbackController extends Controller
             ]);
             
             DB::commit();
-            
+
+            session()->forget('instructorsToEvaluate');
+            session()->forget('completedInstructors');
             return redirect()->route('student.dashboard')
                 ->with('success', 'Evaluation submitted successfully! Thank you for your feedback.');
-        } catch (\Exception $e) {
+            } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Error submitting evaluation: ' . $e->getMessage());
         }

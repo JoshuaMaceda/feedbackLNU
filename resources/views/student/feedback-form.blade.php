@@ -142,4 +142,25 @@
         </div>
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form[action="{{ route('feedback.store') }}"]');
+    if (form) {
+        form.addEventListener('submit', function() {
+            // Store a flag in session storage
+            sessionStorage.setItem('evaluationSubmitted', 'true');
+        });
+    }
+    
+    // Check if we need to force refresh dashboard after redirect
+    if (sessionStorage.getItem('evaluationSubmitted') === 'true') {
+        sessionStorage.removeItem('evaluationSubmitted');
+        // If we're on the dashboard page after submission, force a hard refresh
+        if (window.location.href.includes('dashboard')) {
+            window.location.reload(true);
+        }
+    }
+});
+</script>
 @endsection

@@ -5,6 +5,14 @@
     $instructorsToEvaluate = $instructorsToEvaluate ?? [];
     $colors = $colors ?? ['primary', 'success', 'danger', 'warning', 'info'];
     $activeInstructorId = $activeInstructorId ?? null; // Get the active instructor ID
+
+
+    // Force refresh instructor data if coming from a successful evaluation
+    if (session('success') && str_contains(session('success'), 'Evaluation submitted')) {
+        $instructorsToEvaluate = [];
+        $completedInstructors = [];
+        // We'll recalculate these in the layout.blade.php
+    }
 @endphp
 
 <!-- Instructors Sidebar -->

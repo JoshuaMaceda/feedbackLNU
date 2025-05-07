@@ -30,26 +30,32 @@
                 $currentStudent = \App\Models\Student::where('user_id', Auth::id())->first();
                 $userName = $userName ?? ($currentStudent ? "{$currentStudent->first_name} {$currentStudent->last_name}" : 'Guest');
                 
-                // If no instructorsToEvaluate has been passed, let's get them
+                //para evaluation 
                 if (!isset($instructorsToEvaluate) || empty($instructorsToEvaluate)) {
                     $studentEnrollments = $currentStudent ? $currentStudent->enrollments()->with('course.teacher')->get() : collect([]);
                     $instructorsToEvaluate = [];
+                    $completedInstructors = []; // Add this line to initialize completed instructors
                     
                     foreach ($studentEnrollments as $enrollment) {
-                        if (!$enrollment->hasEvaluation()) {
-                            $course = $enrollment->course;
-                            $teacher = $course->teacher;
-                            
-                            $instructorsToEvaluate[$teacher->teacher_id] = [
-                                'id' => $teacher->teacher_id,
-                                'title' => $teacher->title,
-                                'name' => "{$teacher->first_name} {$teacher->last_name}",
-                                'subject' => $course->course_name,
-                                'course_code' => $course->course_code,
-                                'semester' => $course->semester,
-                                'year' => $course->year,
-                                'completed' => false,
-                            ];
+                        $course = $enrollment->course;
+                        $teacher = $course->teacher;
+                        $hasEvaluated = $enrollment->hasEvaluation(); // This is the key line
+                        
+                        $instructorInfo = [
+                            'id' => $teacher->teacher_id,
+                            'title' => $teacher->title,
+                            'name' => "{$teacher->first_name} {$teacher->last_name}",
+                            'subject' => $course->course_name,
+                            'course_code' => $course->course_code,
+                            'semester' => $course->semester,
+                            'year' => $course->year,
+                            'completed' => $hasEvaluated,
+                        ];
+                        
+                        if (!$hasEvaluated) {
+                            $instructorsToEvaluate[$teacher->teacher_id] = $instructorInfo;
+                        } else {
+                            $completedInstructors[$teacher->teacher_id] = $instructorInfo;
                         }
                     }
                 }
